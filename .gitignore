@@ -1,5 +1,7 @@
 
 *.targets
+src/Student-Enroll-REAL/bin/
+src/Student-Enroll-REAL/obj/
 src/Student-Enroll-REAL/obj/Student-Enroll-REAL.csproj.nuget.g.props
 src/Student-Enroll-REAL/obj/Student-Enroll-REAL.csproj.nuget.dgspec.json
 src/Student-Enroll-REAL/obj/project.nuget.cache
