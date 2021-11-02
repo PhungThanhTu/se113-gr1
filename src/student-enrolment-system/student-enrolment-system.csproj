@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>student_enrolment_system</RootNamespace>
+    <GenerateProgramFile>false</GenerateProgramFile>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
