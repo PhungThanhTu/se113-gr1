@@ -3,7 +3,7 @@ using System;
 
 namespace student_enrolment_system
 { 
-    class Account {
+    public class Account {
         public string Username;
         public string Password;
         public string AccountType;
@@ -16,8 +16,20 @@ namespace student_enrolment_system
             Username = usr;
             Password = pss;
         }
+
+        public override bool Equals(object obj)
+        {   
+            //Check for null and compare run-time types.
+            if ((obj == null) || ! this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            Account a = (Account) obj;
+            return this.AccountType == a.AccountType && this.Username == a.Username && this.Password == a.Password;
+           
+        }
     }
-    class Login {
+    public class Login {
         // query related data
         const string ACCOUNT_TABLE_NAME = "";
         const string ACCOUNT_TABLE_FIELD_USERNAME = "";
@@ -26,11 +38,12 @@ namespace student_enrolment_system
 
 
         // read input
-        public Account inputAccount(string username,string password){
+        public static Account inputAccount(string username,string password){
+            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return null;
             return new Account(username,password);
         }
         // query username to database to get username and password based on input username
-        public Account getQueriedAccount(Account inputAccount)
+        public static Account getQueriedAccount(Account inputAccount)
         {   
             // get password from database based on username
             string Password = ExecuteQuery.GetStringFromQuery("Select "+ ACCOUNT_TABLE_FIELD_PASSWORD +" from "+ ACCOUNT_TABLE_NAME + " where "
@@ -56,7 +69,7 @@ namespace student_enrolment_system
         }
 
         // check if password is true
-        public bool checkAuthentication(Account inputAccount, Account queriedAccount)
+        public static bool checkAuthentication(Account inputAccount, Account queriedAccount)
         {
             // if queried account is null, authentication failed
             if(queriedAccount == null) return false;
@@ -68,15 +81,14 @@ namespace student_enrolment_system
         }
         
         // give account type to the input account 
-        public Account getVerifiedAccount(Account inputAccount, Account queriedAccount)
+        public static Account getVerifiedAccount(Account inputAccount, Account queriedAccount)
         {
             if(!checkAuthentication(inputAccount,queriedAccount)) inputAccount.AccountType = "error"; // error authentication make real account type error
             else inputAccount.AccountType = queriedAccount.AccountType;
 
             return inputAccount; 
         }
-
-        public string LoginResult(Account verifiedAccount)
+        public static string LoginResult(Account verifiedAccount)
         {
             return verifiedAccount.AccountType;
         }

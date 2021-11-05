@@ -17,6 +17,12 @@ namespace student_enrolment_system
             this.SubjectId = sid;
             this.Score = score;
         }
+
+        public override bool Equals(object obj)
+        {
+            StudentScore o = (StudentScore) obj;
+            return this.StudentId == o.StudentId && this.Score == o.Score && this.SubjectId == o.SubjectId;
+        }
     }
 
     public class StudentScoreSetter
@@ -28,7 +34,7 @@ namespace student_enrolment_system
         const string TABLE_FIELD_SUBJECT_ID_NAME ="subject_id";
 
         // check if datatype valid
-        public bool checkDatatype(string score)
+        public static bool checkDatatype(string score)
         {
             if(float.TryParse(score,out float n))
                 return true;
@@ -36,7 +42,7 @@ namespace student_enrolment_system
         }
 
         // check if score valid
-        public bool isScoreValid(float score)
+        public static bool isScoreValid(float score)
         {
             if(score < 0)
                 return false;
@@ -46,13 +52,13 @@ namespace student_enrolment_system
         }
         
         // get inputdata from UI
-        public StudentScore inputData(int StudentId,int SubjectId,float Score)
+        public static StudentScore inputData(int StudentId,int SubjectId,float Score)
         {
             return new StudentScore(StudentId,SubjectId,Score);
         }
 
         // send update query to database
-        public void SendUpdateQuery(StudentScore student_score)
+        public static void SendUpdateQuery(StudentScore student_score)
         {
             ExecuteQuery.executeQuery("UPDATE table "+TABLE_NAME+" set "+ TABLE_FIELD_SCORE_NAME +" = "+student_score.Score+" where "+TABLE_FIELD_STUDENT_ID_NAME+ " = " + student_score + " and "+ TABLE_FIELD_SUBJECT_ID_NAME+" = " + student_score.SubjectId);
         }
