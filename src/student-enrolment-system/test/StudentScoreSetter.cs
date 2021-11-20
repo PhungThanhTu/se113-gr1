@@ -67,7 +67,7 @@ public class TestInputData
     public void test2()
     {
         // input
-        float score = 3;
+        float score = 4.2f;
         int studentID = 101;
         int subjectID = 4;
 

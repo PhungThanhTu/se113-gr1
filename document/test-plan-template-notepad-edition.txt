@@ -1,0 +1,39 @@
+1.Overview
+- Product name
+- Product revision
+- Project lead
+- test project staff
+- product overview
+2. Test plan objective
+3. Testing strategy
+- System test
+- Unit test
+- Installation test
+
+General testing process approach
+- item to be tested
+- item not to be tested
+	+ performance
+	+ stress and volume
+	+ recovery
+	+ documenation
+4. Hardware/software resources
+- hardware requirement
+- software requirements
+5. Type of testing
+ 5.1 Feature test
+  - feature to be tested
+  - feature not to be tested : none
+ 5.2 Installation test
+6. Suspenstion criteria and resumption requirements
+7. Test schedule and resources
+8. role and responsibility
+10 deliverable
+- SRS
+- Test plan
+- SDD
+- Testcases
+- Unit testcases
+- Bug tracking list
+- Source code 
+- Github repository
