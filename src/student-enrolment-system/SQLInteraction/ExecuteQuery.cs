@@ -21,7 +21,7 @@ namespace student_enrolment_system
             }
         }
 
-        public static DataTable SqlDataTableFromQuery(string query, string table_name = "underfined")
+        public static DataTable getSqlDataTableFromQuery(string query, string table_name = "underfined")
         {
 
             CheckLogin.ConnectToSQL();
