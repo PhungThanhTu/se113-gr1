@@ -1,9 +1,59 @@
 
-
+using System.Data;
+using System.Data.SqlClient;
 
 namespace student_enrolment_system
 {   
     
+    public class Student 
+    {
+
+        const string STUDENT_TABLE_NAME = "";
+        const string COLUMN_ID = "";
+        const string COLUMN_NAME = "";
+        const string COLUMN_SEX = "";
+        const string COLUMN_DOB = "";
+        const string COLUMN_TOTAL_SCORE = "";
+        const string COLUMN_BENCHMARK_ID = "";
+
+        int Id;
+        string Name = "";
+        string Sex = "";
+        
+        string DateOfBirth = "";
+
+        int Benchmark_Id = 0;
+
+        float TotalScore = 0;
+
+        public Student(int id)
+        {   
+            this.Id = id;
+            updateData();
+
+        }
+        public void updateData() {
+             DataTable dt = ExecuteQuery.getSqlDataTableFromQuery("SELECT * from "+ STUDENT_TABLE_NAME + " + where "+ COLUMN_ID + " = "+ this.Id.ToString());
+
+            if(dt == null)
+            {
+
+            }
+            else
+            {   
+                DataRow row = dt.Rows[0];
+                this.Name = row[COLUMN_NAME].ToString();
+                this.Sex = row[COLUMN_SEX].ToString();
+                this.DateOfBirth = row[COLUMN_DOB].ToString();
+                this.Benchmark_Id = int.Parse(row[COLUMN_BENCHMARK_ID].ToString());
+                this.TotalScore = float.Parse(row[COLUMN_TOTAL_SCORE].ToString());
+            }
+        }
+
+
+
+    }
+
     public class StudentScore
     {
         public int StudentId;
