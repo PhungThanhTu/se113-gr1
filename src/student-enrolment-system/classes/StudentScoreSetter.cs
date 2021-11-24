@@ -1,4 +1,5 @@
 
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
@@ -7,13 +8,13 @@ using System.Collections.Generic;
 namespace student_enrolment_system
 {   
     static class StudentConst {
-        public const string STUDENT_TABLE_NAME = "";
-        public const string COLUMN_ID = "";
-        public const string COLUMN_NAME = "";
-        public const string COLUMN_SEX = "";
-        public const string COLUMN_DOB = "";
-        public const string COLUMN_TOTAL_SCORE = "";
-        public const string COLUMN_BENCHMARK_ID = "";
+        public const string STUDENT_TABLE_NAME = "student";
+        public const string COLUMN_ID = "id";
+        public const string COLUMN_NAME = "name";
+        public const string COLUMN_SEX = "sex";
+        public const string COLUMN_DOB = "dob";
+        public const string COLUMN_TOTAL_SCORE = "total_score";
+        public const string COLUMN_BENCHMARK_ID = "benchmark_id";
     }
     public class Student 
     {
@@ -29,6 +30,9 @@ namespace student_enrolment_system
         int Benchmark_Id = 0;
 
         float TotalScore = 0;
+
+        // properties
+        
 
         public Student(int Id, string Name, string Sex, string DateOfBirth , int Benchmark_Id, float TotalScore)
         {
@@ -94,7 +98,14 @@ namespace student_enrolment_system
             this.TotalScore = total_score;
         }
 
-
+        public string toString()
+        {
+            return "[ID:"+this.getId().ToString()+",Name:"+this.getName()+",Sex:"+this.getSex()+",DOB:"+this.getDateOfBirth()+",BenchmarkID:"+this.getBenchmarkId().ToString()+",Score:"+this.getTotalScore().ToString()+"]";
+        }
+        public void logConsole()
+        {
+            Console.WriteLine(this.toString());
+        }
     }
 
     
@@ -108,23 +119,30 @@ namespace student_enrolment_system
         
 
         public Students()
-        {
-            DataTable QueriedStudentTable = ExecuteQuery.getSqlDataTableFromQuery("SELECT * from " + StudentConst.STUDENT_TABLE_NAME);
+        {   
+            try {
+                DataTable QueriedStudentTable = ExecuteQuery.getSqlDataTableFromQuery("SELECT * from " + StudentConst.STUDENT_TABLE_NAME);
 
-            for(int i = 0; i < QueriedStudentTable.Rows.Count; i++)
-            {
-                DataRow SingleStudentRow = QueriedStudentTable.Rows[i];
-                int id = int.Parse(SingleStudentRow[StudentConst.COLUMN_ID].ToString());
-                string Name = SingleStudentRow[StudentConst.COLUMN_NAME].ToString();
-                string Sex = SingleStudentRow[StudentConst.COLUMN_SEX].ToString();
-                string DateOfBirth = SingleStudentRow[StudentConst.COLUMN_DOB].ToString();
-                int Benchmark_Id = int.Parse(SingleStudentRow[StudentConst.COLUMN_BENCHMARK_ID].ToString());
-                float TotalScore = float.Parse(SingleStudentRow[StudentConst.COLUMN_TOTAL_SCORE].ToString());
+                for(int i = 0; i < QueriedStudentTable.Rows.Count; i++)
+                {
+                    DataRow SingleStudentRow = QueriedStudentTable.Rows[i];
+                    int id = int.Parse(SingleStudentRow[StudentConst.COLUMN_ID].ToString());
+                    string Name = SingleStudentRow[StudentConst.COLUMN_NAME].ToString();
+                    string Sex = SingleStudentRow[StudentConst.COLUMN_SEX].ToString();
+                    string DateOfBirth = SingleStudentRow[StudentConst.COLUMN_DOB].ToString();
+                    int Benchmark_Id = int.Parse(SingleStudentRow[StudentConst.COLUMN_BENCHMARK_ID].ToString());
+                    float TotalScore = float.Parse(SingleStudentRow[StudentConst.COLUMN_TOTAL_SCORE].ToString());
 
-                Student newStudent = new Student(id,Name,Sex,DateOfBirth,Benchmark_Id,TotalScore);
-                this.AllStudents.Add(newStudent);
+                    Student newStudent = new Student(id,Name,Sex,DateOfBirth,Benchmark_Id,TotalScore);
+                    this.AllStudents.Add(newStudent);
 
             }
+            }
+            catch 
+            {
+                Console.WriteLine("Cannot get data from server");
+            }   
+           
         }
         public Student getSingleStudent(int id)
         {
@@ -137,6 +155,8 @@ namespace student_enrolment_system
             }
              return new Student(-1);
         }
+
+        public Student at(int index){ return AllStudents[index];}
     }
     public class StudentScore
     {

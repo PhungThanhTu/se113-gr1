@@ -29,7 +29,7 @@ namespace student_enrolment_system
            
         }
     }
-    public class Login {
+    public static class Login {
         // query related data
         const string ACCOUNT_TABLE_NAME = "";
         const string ACCOUNT_TABLE_FIELD_USERNAME = "";
@@ -93,6 +93,15 @@ namespace student_enrolment_system
             return verifiedAccount.AccountType;
         }
 
-        
+        public static string login(string username,string password)
+        {
+            Account InputAccount = Login.inputAccount(username,password);
+
+            Account QueriedAccount = Login.getQueriedAccount(InputAccount);
+
+            Account VerifiedAccount = Login.getVerifiedAccount(InputAccount,QueriedAccount);
+
+            return Login.LoginResult(VerifiedAccount);
+        }
     }
 }
