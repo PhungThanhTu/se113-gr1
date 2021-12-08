@@ -17,7 +17,7 @@
 
         <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Margin="32,182,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="31" Width="140"/>
+        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Height="31" Width="140" Click="btnLogin_Click"/>
 
         <Button x:Name="btnViewScore" Content="View Score" HorizontalAlignment="Center" Margin="0,296,0,0" VerticalAlignment="Top" Height="29" Width="140"/>
 

@@ -77,7 +77,7 @@ namespace student_enrolment_system {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/student-enrolment-system;V1.0.0.0;component/viewscore.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/student-enrolment-system;component/viewscore.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ViewScore.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

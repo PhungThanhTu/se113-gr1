@@ -1,4 +1,5 @@
-﻿create database STUDENTENROL
+﻿
+create database STUDENTENROL
 use STUDENTENROL
 SET DATEFORMAT DMY
 go
@@ -68,3 +69,5 @@ insert into Subject values(6,N'Sinh')
 insert into Subject values(7,N'Sử')
 insert into Subject values(8,N'Địa')
 insert into Subject values(9,N'GDCD')
+
+

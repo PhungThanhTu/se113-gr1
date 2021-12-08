@@ -1,5 +1,5 @@
 using System;
-
+using System.Windows;
 
 namespace student_enrolment_system
 { 
@@ -31,10 +31,10 @@ namespace student_enrolment_system
     }
     public static class Login {
         // query related data
-        const string ACCOUNT_TABLE_NAME = "";
-        const string ACCOUNT_TABLE_FIELD_USERNAME = "";
-        const string ACCOUNT_TABLE_FIELD_PASSWORD = "";
-        const string ACCOUNT_TABLE_FIELD_ACCOUNT_TYPE = "";
+        const string ACCOUNT_TABLE_NAME = "Account";
+        const string ACCOUNT_TABLE_FIELD_USERNAME = "Username";
+        const string ACCOUNT_TABLE_FIELD_PASSWORD = "Password";
+        const string ACCOUNT_TABLE_FIELD_ACCOUNT_TYPE = "Account_type";
 
 
         // read input
@@ -44,11 +44,22 @@ namespace student_enrolment_system
         }
         // query username to database to get username and password based on input username
         public static Account getQueriedAccount(Account inputAccount)
-        {   
+        {
             // get password from database based on username
-            string Password = ExecuteQuery.GetStringFromQuery("Select "+ ACCOUNT_TABLE_FIELD_PASSWORD +" from "+ ACCOUNT_TABLE_NAME + " where "
-            + ACCOUNT_TABLE_FIELD_USERNAME + " = " + inputAccount.Username
-            );
+            string Password;
+            MessageBox.Show("Select " + ACCOUNT_TABLE_FIELD_PASSWORD + " from " + ACCOUNT_TABLE_NAME + " where "
+               + ACCOUNT_TABLE_FIELD_USERNAME + " = '" + inputAccount.Username + "'");
+            try
+            {
+                Password = ExecuteQuery.GetStringFromQuery("Select " + ACCOUNT_TABLE_FIELD_PASSWORD + " from " + ACCOUNT_TABLE_NAME + " where "
+                + ACCOUNT_TABLE_FIELD_USERNAME + " = '" + inputAccount.Username +"'"
+                );
+               
+            }
+            catch
+            {
+                return null;
+            }
 
             // if password = null, return null 
             if( Password == null)
@@ -58,8 +69,10 @@ namespace student_enrolment_system
             {   
                 // get account type from database
                 string AccountType = ExecuteQuery.GetStringFromQuery("Select "+ ACCOUNT_TABLE_FIELD_ACCOUNT_TYPE +" from "+ ACCOUNT_TABLE_NAME + " where "
-                + ACCOUNT_TABLE_FIELD_USERNAME + " = " + inputAccount.Username
+                + ACCOUNT_TABLE_FIELD_USERNAME + " = '" + inputAccount.Username + "'"
                 );
+
+                
 
                 Account QueriedAccount = new Account(inputAccount.Username, Password);
                 QueriedAccount.AccountType = AccountType;
