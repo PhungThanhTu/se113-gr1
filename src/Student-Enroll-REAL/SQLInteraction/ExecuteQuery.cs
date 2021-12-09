@@ -38,12 +38,10 @@ namespace Student_Enroll_REAL.SQLInteraction
 
             sda.Fill(dt);
 
-
-
-
-
             CheckLogin.Connection.Close();
             return dt;
+
+            
 
 
         }
